@@ -1,0 +1,4 @@
+repository "YiGuang2026@tj_lyzming@cloud.cn"
+  path "/"
+    br "/main"
+    co "/main"
