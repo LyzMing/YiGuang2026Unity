@@ -11,10 +11,10 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody2D rb;
     private float moveController;
+    private Animator anim;
     private bool isRunScript;
     private bool isJumpScript;
-    private Animator anim;
-    private bool isGround;
+    private bool isGroundScript;
 
     // Start is called before the first frame update
     void Start()
@@ -33,14 +33,16 @@ public class PlayerMove : MonoBehaviour
         if (moveController < 0)
             transform.localScale = new Vector2(-1, 1);
 
-        isGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
-        if (Input.GetButtonDown("Jump") && isGround)
+        isGroundScript = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
+        if (Input.GetButtonDown("Jump") && isGroundScript)
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-        if (rb.velocity.y > 0.3f)
+        if (rb.velocity.y > 0 && !isGroundScript)
             isJumpScript = true;
         else
             isJumpScript = false;
+
         anim.SetBool("isJump", isJumpScript);
+        anim.SetBool("isGround", isGroundScript);
 
         isRunScript = (moveController != 0);
         anim.SetBool("isRun", isRunScript);
