@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField]private float moveSpeed;
-    [SerializeField]private float jumpSpeed;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpSpeed;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float distanceToGround;
 
     private Rigidbody2D rb;
     private float moveController;
     private bool isRunScript;
     private bool isJumpScript;
     private Animator anim;
+    private bool isGround;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +33,8 @@ public class PlayerMove : MonoBehaviour
         if (moveController < 0)
             transform.localScale = new Vector2(-1, 1);
 
-        if (Input.GetButtonDown("Jump"))
+        isGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
+        if (Input.GetButtonDown("Jump") && isGround)
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         if (rb.velocity.y > 0.3f)
             isJumpScript = true;
