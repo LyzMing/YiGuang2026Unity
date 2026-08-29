@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public bool isRun;
+    public bool isJump;
+    public bool isGround;
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private LayerMask groundLayer;
@@ -12,9 +16,6 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rb;
     private float moveController;
     private Animator anim;
-    private bool isRunScript;
-    private bool isJumpScript;
-    private bool isGroundScript;
 
     // Start is called before the first frame update
     void Start()
@@ -26,25 +27,29 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Run();
+        Jump();
+    }
+
+    private void Run()
+    {
         moveController = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveSpeed * moveController, rb.velocity.y);
         if (moveController > 0)
             transform.localScale = new Vector2(1, 1);
         if (moveController < 0)
             transform.localScale = new Vector2(-1, 1);
+        isRun = (moveController != 0);
+    }
 
-        isGroundScript = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
-        if (Input.GetButtonDown("Jump") && isGroundScript)
+    private void Jump()
+    {
+        isGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
+        if (Input.GetButtonDown("Jump") && isGround)
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-        if (rb.velocity.y > 0 && !isGroundScript)
-            isJumpScript = true;
+        if (rb.velocity.y > 0 && !isGround)
+            isJump = true;
         else
-            isJumpScript = false;
-
-        anim.SetBool("isJump", isJumpScript);
-        anim.SetBool("isGround", isGroundScript);
-
-        isRunScript = (moveController != 0);
-        anim.SetBool("isRun", isRunScript);
+            isJump = false;
     }
 }
