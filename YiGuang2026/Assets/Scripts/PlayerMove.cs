@@ -12,16 +12,15 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float jumpSpeed;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float distanceToGround;
+    [SerializeField] private float force;
 
     private Rigidbody2D rb;
     private float moveController;
-    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,6 +28,12 @@ public class PlayerMove : MonoBehaviour
     {
         Run();
         Jump();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isJump)
+            rb.AddForce(Vector2.down * force);
     }
 
     private void Run()
@@ -45,6 +50,7 @@ public class PlayerMove : MonoBehaviour
     private void Jump()
     {
         isGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
+
         if (Input.GetButtonDown("Jump") && isGround)
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         if (rb.velocity.y > 0 && !isGround)
