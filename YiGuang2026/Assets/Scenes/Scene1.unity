@@ -1486,7 +1486,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   distanceToGround: 1.1
-  force: 10
+  force: 20
 --- !u!95 &723434589
 Animator:
   serializedVersion: 5
