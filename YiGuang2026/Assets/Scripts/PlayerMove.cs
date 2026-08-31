@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody2D rb;
     private float moveController;
+    private int jumpTimes = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -51,11 +52,18 @@ public class PlayerMove : MonoBehaviour
     {
         isGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
 
-        if (Input.GetButtonDown("Jump") && isGround)
+        if (Input.GetButtonDown("Jump") && jumpTimes < 1)
+        {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            jumpTimes++;
+        }
+
         if (rb.velocity.y > 0 && !isGround)
             isJump = true;
         else
             isJump = false;
+
+        if (isGround)
+            jumpTimes = 0;
     }
 }
