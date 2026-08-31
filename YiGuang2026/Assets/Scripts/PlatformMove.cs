@@ -31,13 +31,21 @@ public class PlatformMove : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, movePos, moveSpeed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.transform.parent = this.transform;
+        PlayerMove player = collision.GetComponentInParent<PlayerMove>();
+        if (player != null)
+        {
+            player.transform.parent = this.transform;
+        }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        collision.transform.parent = null;
+        PlayerMove player = collision.GetComponentInParent<PlayerMove>();
+        if (player != null)
+        {
+            player.transform.parent = null;
+        }
     }
 }

@@ -17,11 +17,13 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rb;
     private float moveController;
     private int jumpTimes = 0;
+    private WallChecker wallChecker;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        wallChecker = GetComponentInChildren<WallChecker>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,7 @@ public class PlayerMove : MonoBehaviour
     {
         Run();
         Jump();
+        Climb();
     }
 
     private void FixedUpdate()
@@ -55,7 +58,9 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetButtonDown("Jump") && jumpTimes < 1)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-            jumpTimes++;
+
+            if (!wallChecker.inWall)
+                jumpTimes++;
         }
 
         if (rb.velocity.y > 0 && !isGround)
@@ -63,7 +68,15 @@ public class PlayerMove : MonoBehaviour
         else
             isJump = false;
 
-        if (isGround)
+        if (isGround || wallChecker.inWall)
             jumpTimes = 0;
+    }
+
+    private void Climb()
+    {
+        if (wallChecker.inWall && !isJump)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+        }
     }
 }
