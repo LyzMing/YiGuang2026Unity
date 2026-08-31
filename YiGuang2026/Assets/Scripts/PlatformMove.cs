@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class PlatformMove : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PlatformMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        movePos = pos2.transform.position;
+        transform.position = pos1.transform.position;
     }
 
     // Update is called once per frame

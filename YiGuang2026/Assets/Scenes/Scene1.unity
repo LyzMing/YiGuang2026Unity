@@ -1517,7 +1517,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 723434583}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d2fc2c2b1c738c844b67a33256344161, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1900,7 +1900,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0023510456, y: 0.026637077}
+  m_Offset: {x: 0.0014845729, y: -0.0014925599}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1911,7 +1911,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.883213, y: 0.93677926}
+  m_Size: {x: 1.9880592, y: 0.99303854}
   m_EdgeRadius: 0
 --- !u!212 &1490052830
 SpriteRenderer:
