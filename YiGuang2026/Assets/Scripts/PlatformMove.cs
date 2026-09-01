@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class PlatformMove : MonoBehaviour
 {
@@ -10,42 +9,25 @@ public class PlatformMove : MonoBehaviour
     [SerializeField] private GameObject pos2;
 
     private Vector2 movePos;
+    private Rigidbody2D rb;
 
-    // Start is called before the first frame update
+    public Vector2 CurrentVelocity { get; private set; }   // 新增：当前平台速度
+
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         transform.position = pos1.transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (Vector2.Distance(transform.position, pos2.transform.position) < 0.1f)
-        {
+        if (Vector2.Distance(rb.position, pos2.transform.position) < 0.1f)
             movePos = pos1.transform.position;
-        }
-        else if (Vector2.Distance(transform.position, pos1.transform.position) < 0.1f)
-        {
+        else if (Vector2.Distance(rb.position, pos1.transform.position) < 0.1f)
             movePos = pos2.transform.position;
-        }
-        transform.position = Vector2.MoveTowards(transform.position, movePos, moveSpeed * Time.deltaTime);
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        PlayerMove player = collision.GetComponentInParent<PlayerMove>();
-        if (player != null)
-        {
-            player.transform.parent = this.transform;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        PlayerMove player = collision.GetComponentInParent<PlayerMove>();
-        if (player != null)
-        {
-            player.transform.parent = null;
-        }
+        Vector2 newPos = Vector2.MoveTowards(rb.position, movePos, moveSpeed * Time.fixedDeltaTime);
+        CurrentVelocity = (newPos - rb.position) / Time.fixedDeltaTime;   // 新增：记录速度
+        rb.MovePosition(newPos);
     }
 }
