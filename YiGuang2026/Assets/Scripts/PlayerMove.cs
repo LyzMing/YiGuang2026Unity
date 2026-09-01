@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float distanceToGround;
     [SerializeField] private float force;
+    [SerializeField] private Transform spawnPoint;   // 在 Inspector 拖入重生点
 
     private Rigidbody2D rb;
     private float moveController;
@@ -24,6 +25,8 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         wallChecker = GetComponentInChildren<WallChecker>();
+
+        transform.position = spawnPoint.position;
     }
 
     // Update is called once per frame

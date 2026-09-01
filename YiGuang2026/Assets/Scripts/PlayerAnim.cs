@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerAnim : MonoBehaviour
 {
-    private enum Anim { idle,run,jump,fall};
-    private Anim animState;
+    private enum Anim { idle,run,jump,fall,hurt};
+    [SerializeField] private Anim animState;
     private Animator anim;
     private PlayerMove playerMove;
+    private PlayerDie playerDie;
 
     // Start is called before the first frame update
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
+        playerDie = GetComponent<PlayerDie>();
         anim = GetComponent<Animator>();
     }
 
@@ -24,13 +26,15 @@ public class PlayerAnim : MonoBehaviour
 
     private void SetAnimState()
     {
-        if (!playerMove.isRun && !playerMove.isJump && playerMove.isGround)
+        if (playerDie.isDead)
+            animState = Anim.hurt;
+        else if (!playerMove.isRun && !playerMove.isJump && playerMove.isGround)
             animState = Anim.idle;
         else if (playerMove.isRun && playerMove.isGround)
             animState = Anim.run;
         else if (playerMove.isJump)
             animState = Anim.jump;
-        else
+        else if (!playerMove.isJump && !playerMove.isGround)
             animState = Anim.fall;
 
         anim.SetInteger("state", (int)animState);
