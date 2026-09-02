@@ -19,12 +19,14 @@ public class PlayerMove : MonoBehaviour
     private float moveController;
     private int jumpTimes = 0;
     private WallChecker wallChecker;
+    private GroundChecker groundChecker;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         wallChecker = GetComponentInChildren<WallChecker>();
+        groundChecker = GetComponentInChildren<GroundChecker>();
 
         transform.position = spawnPoint.position;
     }
@@ -68,7 +70,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Jump()
     {
-        isGround = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
+        isGround = groundChecker.isGround;
 
         if (Input.GetButtonDown("Jump") && jumpTimes < 1)
         {
