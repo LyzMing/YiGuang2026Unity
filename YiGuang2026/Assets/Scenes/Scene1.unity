@@ -2211,6 +2211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  dieTimes: 0
   spawnPoint: {fileID: 1331779929}
   deathAnimDuration: 1
 --- !u!114 &723434593
@@ -2226,7 +2227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  hp: 0
+  hp: 3
 --- !u!4 &745255576 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1872634749927517320, guid: 10ea73318cf77394c936c1e8e2061827, type: 3}
@@ -2776,8 +2777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18d7c9f638e28f4fb993a9d069dbe16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 402227348}
   gameState: {fileID: 723434593}
+  playerDie: {fileID: 723434592}
 --- !u!4 &1140152816 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8757509391449015008, guid: 2d7ffd4f98039a645a67fe5fd881ff12, type: 3}

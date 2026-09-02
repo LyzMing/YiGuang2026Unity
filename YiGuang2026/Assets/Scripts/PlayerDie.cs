@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDie : MonoBehaviour
 {
     public bool isDead = false;
+    public int dieTimes = 0;
 
     [SerializeField] private Transform spawnPoint;   // 在 Inspector 拖入重生点
     [SerializeField] private float deathAnimDuration = 1f; // 死亡动画时长
@@ -13,6 +14,7 @@ public class PlayerDie : MonoBehaviour
     {
         if (isDead) return;   // 防止重复触发
         isDead = true;
+        dieTimes++;
         StartCoroutine(DeathSequence());
     }
 
