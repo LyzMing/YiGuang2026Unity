@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class TextManager : MonoBehaviour
 {
-    [SerializeField] private GameState gameState;
     [SerializeField] private PlayerDie playerDie;
 
     private TMP_Text scoreText;
@@ -23,11 +22,11 @@ public class TextManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score = gameState.score.ToString();
+        score = GameState.Instance.score.ToString();
         scoreText.text = "Score: " + score;
 
-        if ((gameState.hp - playerDie.dieTimes) >= 0)
-            hp = (gameState.hp - playerDie.dieTimes).ToString();
+        if (GameState.Instance.hp >= 0)
+            hp = GameState.Instance.hp.ToString();
         hpText.text = "HP: " + hp;
     }
 }

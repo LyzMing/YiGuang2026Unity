@@ -13,15 +13,17 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameState.Instance.score == 3)
+            GameState.Instance.GameOver();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            GameState gameState = collision.GetComponent<GameState>();
-            gameState.score += 1;
+            GameState.Instance.score++;
+            if (GameState.Instance.score == 3)
+                GameState.Instance.GameOver();
             Destroy(gameObject);
         }
     }

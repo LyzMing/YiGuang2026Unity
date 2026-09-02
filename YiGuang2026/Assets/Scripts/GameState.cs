@@ -1,21 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
     public int score = 0;
     public int hp = 3;
+    public static GameState Instance;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GameOver()
     {
-        
+        SceneManager.LoadScene("OverScene");
+    }
+
+    public void RestartGame()
+    {
+        score = 0;
+        hp = 3;
+
+        SceneManager.LoadScene("Scene1");
     }
 }
