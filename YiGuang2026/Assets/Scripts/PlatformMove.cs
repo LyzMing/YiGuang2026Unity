@@ -1,4 +1,4 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class PlatformMove : MonoBehaviour
     private Vector2 movePos;
     private Rigidbody2D rb;
 
-    public Vector2 CurrentVelocity { get; private set; }   // 新增：当前平台速度
+    public Vector2 CurrentVelocity { get; private set; }   // 鏂板锛氬綋鍓嶅钩鍙伴�熷害
 
     void Start()
     {
@@ -27,7 +27,7 @@ public class PlatformMove : MonoBehaviour
             movePos = pos2.transform.position;
 
         Vector2 newPos = Vector2.MoveTowards(rb.position, movePos, moveSpeed * Time.fixedDeltaTime);
-        CurrentVelocity = (newPos - rb.position) / Time.fixedDeltaTime;   // 新增：记录速度
+        CurrentVelocity = (newPos - rb.position) / Time.fixedDeltaTime;   // 鏂板锛氳褰曢�熷害
         rb.MovePosition(newPos);
     }
 }

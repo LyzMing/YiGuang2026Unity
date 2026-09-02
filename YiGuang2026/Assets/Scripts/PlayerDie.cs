@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,29 +6,29 @@ public class PlayerDie : MonoBehaviour
 {
     public bool isDead = false;
 
-    [SerializeField] private Transform spawnPoint;   // ÔÚ Inspector ÍÏÈëÖØÉúµã
-    [SerializeField] private float deathAnimDuration = 1f; // ËÀÍö¶¯»­Ê±³¤
+    [SerializeField] private Transform spawnPoint;   // åœ¨ Inspector æ‹–å…¥é‡ç”Ÿç‚¹
+    [SerializeField] private float deathAnimDuration = 1f; // æ­»äº¡åŠ¨ç”»æ—¶é•¿
 
     public void Die()
     {
-        if (isDead) return;   // ·ÀÖ¹ÖØ¸´´¥·¢
+        if (isDead) return;   // é˜²æ­¢é‡å¤è§¦å‘
         isDead = true;
         StartCoroutine(DeathSequence());
     }
 
     private IEnumerator DeathSequence()
     {
-        // ËÀÍöºó½ûÓÃÒÆ¶¯
+        // æ­»äº¡åç¦ç”¨ç§»åŠ¨
         GetComponent<PlayerMove>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
-        // µÈ´ıËÀÍö¶¯»­²¥·ÅÍê±Ï
+        // ç­‰å¾…æ­»äº¡åŠ¨ç”»æ’­æ”¾å®Œæ¯•
         yield return new WaitForSeconds(deathAnimDuration);
 
-        // »Øµ½ÖØÉúµã
+        // å›åˆ°é‡ç”Ÿç‚¹
         transform.position = spawnPoint.position;
 
-        // ÖØÖÃ×´Ì¬
+        // é‡ç½®çŠ¶æ€
         isDead = false;
         GetComponent<PlayerMove>().enabled = true;
     }

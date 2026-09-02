@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,7 +42,7 @@ public class GroundChecker : MonoBehaviour
         }
     }
 
-    //ÓÅ»¯ÌøÔ¾ÊÖ¸ĞµÄÍÁÀÇÊ±¼ä
+    //ä¼˜åŒ–è·³è·ƒæ‰‹æ„Ÿçš„åœŸç‹¼æ—¶é—´
     private IEnumerator CoyoteTime()
     {
         yield return new WaitForSeconds(0.1f);

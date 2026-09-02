@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float distanceToGround;
     [SerializeField] private float force;
-    [SerializeField] private Transform spawnPoint;   // ÔÚ Inspector ÍÏÈëÖØÉúµã
+    [SerializeField] private Transform spawnPoint;   // åœ¨ Inspector æ‹–å…¥é‡ç”Ÿç‚¹
 
     private Rigidbody2D rb;
     private float moveController;
@@ -49,7 +49,7 @@ public class PlayerMove : MonoBehaviour
     {
         moveController = Input.GetAxisRaw("Horizontal");
 
-        // ¼ì²â½ÅÏÂÓĞÃ»ÓĞÆ½Ì¨£¬ÓĞ¾Í°ÑÆ½Ì¨µÄË®Æ½ËÙ¶È¼ÓÉÏ¡£Èç¹û²»¿¼ÂÇ½ÅÏÂÆ½Ì¨ËÙ¶È£¬½ÇÉ«ÔÚÒÆ¶¯Æ½Ì¨ÉÏÒÆËÙ»á±äµÃ·Ç³£Âı
+        // æ£€æµ‹è„šä¸‹æœ‰æ²¡æœ‰å¹³å°ï¼Œæœ‰å°±æŠŠå¹³å°çš„æ°´å¹³é€Ÿåº¦åŠ ä¸Šã€‚å¦‚æœä¸è€ƒè™‘è„šä¸‹å¹³å°é€Ÿåº¦ï¼Œè§’è‰²åœ¨ç§»åŠ¨å¹³å°ä¸Šç§»é€Ÿä¼šå˜å¾—éå¸¸æ…¢
         float groundVx = 0f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, groundLayer);
         if (hit.collider != null)
