@@ -22,8 +22,6 @@ public class ScoreManager : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             GameState.Instance.score++;
-            if (GameState.Instance.score == 3)
-                GameState.Instance.GameOver();
             Destroy(gameObject);
         }
     }

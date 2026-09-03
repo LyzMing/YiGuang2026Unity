@@ -7,7 +7,7 @@ public class GameState : MonoBehaviour
 {
     public int score = 0;
     public int hp = 3;
-    public static GameState Instance;
+    public static GameState Instance; // 单例
 
     private void Awake()
     {
